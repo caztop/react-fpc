@@ -1,0 +1,377 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #F1F0E4;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+#header {
+  background-color: #DDE6ED;
+  padding: 1.5rem 1rem;
+}
+
+.logo-box {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.logo {
+  height: 4rem;
+  width: auto;
+}
+
+.nav-content h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.nav-content p {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #526D82;
+  margin-top: 0.5rem;
+  padding-left: 4.5rem;
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  gap:1rem;
+  padding: 0rem 1rem 0rem 0rem;
+}
+
+#left-sidebar img {
+  width: 100%;
+  height: auto;
+}
+
+#blank1 {
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 3rem;
+}
+
+#slide-name {
+  background-color: #526D82;
+  padding: 0.5rem 1.8rem;
+  text-align: center;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 0.625rem;
+  margin: 0rem 10rem 1rem 10rem;
+}
+
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  max-width: 700px;
+  line-height: 1.6;
+  padding: 1vh;
+  background-color: #9DB2BF;
+}
+
+.slide h2 {
+  text-align: center;
+  font-size: 1.7rem;
+  margin-bottom: 1rem;
+}
+
+.slide ul {
+  list-style: none;
+  padding: 0;
+}
+
+.slide li {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  padding-left: 3rem;
+}
+
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background-color: #9DB2BF;
+  color: #DDE6ED;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+button.prev {
+  left: 0.5rem;
+}
+
+button.next {
+  right: 0.5rem;
+}
+
+.right-sidebars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.right-sidebar {
+  background-color: #FFF9AF;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+}
+
+#blank2 {
+  background-color:white;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  font-size: 6rem;
+}
+
+.right-sidebar img {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+/* 정보박스 */
+
+#blank3 {
+  background-color:#27374D;
+  padding: 0.1rem;
+  margin: 20px 10%;
+  text-align: center;
+  font-size: 0.5rem;
+  border-radius: 50%;
+}
+
+#info {
+  padding: 0.1rem;
+  margin: 20px 9%;
+  text-align: left;
+  font-size: 1.2rem;
+}
+
+.mbox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.box {
+  font-size: 1rem;
+  width: 200px;
+  height: 100px;
+  margin: 10px;
+  background-color: #DDE6ED;
+  border: 1px solid #526D82;
+  display: inline-flex;
+  align-items: center;
+  justify-content: left;
+  cursor: pointer;
+}
+
+.box img {
+  width: auto;
+  height: 100%;
+  padding: 0.3rem;
+}
+
+#postarea {
+  margin-left: 2%;
+}
+
+#postans {
+  margin-top: 0;
+}
+
+#posttitle {
+  font-size: 1.1rem;
+  width: 30%;
+  height: auto;
+  padding: 10px;
+  background-color: #DDE6ED;
+  border: 1px solid #526D82;
+  cursor: pointer;
+}
+
+#postcon {
+  font-size: 1rem;
+  width: 80%;
+  height: 100px;
+  padding: 10px;
+  background-color: #DDE6ED;
+  border: 1px solid #526D82;
+  cursor: pointer;
+}
+
+#posts {
+  font-size: 0.9rem;
+}
+
+#footer {
+  background-color: #27374D;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 0;
+}
+
+/* 📱 반응형 미디어 쿼리 */
+@media (min-width: 900px) {
+  .main-layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  #left-sidebar {
+    width: 20%;
+  }
+
+  .content {
+    flex: 1;
+    padding: 0 1rem;
+  }
+
+  .right-sidebars {
+    width: 25%;
+  }
+
+  #slide-name {
+    position: relative;
+    left: 0;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  .slider-container {
+    height: auto;
+  }
+
+  .slide {
+    height: auto;
+    line-height: 3;
+    padding: 1.5rem 0;
+  }
+
+  .slide h2 {
+    font-size: 1.3rem;
+  }
+
+  .slide li {
+    font-size: 1rem;
+  }
+
+  button.prev,
+  button.next {
+    font-size: 1.5rem;
+    padding: 0.4rem;
+  }
+}
+
+/* 📱 모바일 대응 */
+@media (max-width: 850px) {
+  .nav-content h1 {
+    font-size: 2.2rem;
+    text-align: center;
+  }
+
+  .nav-content p {
+    font-size: 1rem;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  #left-sidebar {
+    display: none;
+  }
+
+  #slide-name {
+    margin: 1rem 3rem;
+    font-size: 1rem;
+  }
+
+  .slider-container {
+    height: auto;
+  }
+
+  .slide {
+    height: auto;
+    padding: 0.5rem 0;
+  }
+
+  .slide h2 {
+    font-size: 1.3rem;
+  }
+
+  .slide li {
+    font-size: 1rem;
+    padding: 0% 5rem;
+  }
+
+  #blank2 {
+    display: none;
+  }
+
+  .right-sidebar {
+    font-size: 1rem;
+    padding: 0.8rem;
+    align-items: center;
+  }
+
+  .logo-box {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    height: 3rem;
+  }
+
+  .mbox {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .box {
+    width: 90%;
+    height: auto;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .box img {
+    width: auto;
+    height: 4rem;
+  }
+
+  #footer {
+    font-size: 0.9rem;
+    padding: 0.8rem;
+  }
+}
