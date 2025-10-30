@@ -125,7 +125,13 @@ app.put('/api/posts/:index', (req, res) => {
   res.json({ message: '수정 완료' });
 });
 
+app.get('/admin-check', (req, res) => {
+  res.json({ isAdmin: !!req.session.isAdmin });
+});
+
 app.post('/admin-logout', (req, res) => {
-  res.clearCookie('admin'); // 세션 쿠키 제거
-  res.json({ success: true });
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid'); // 세션 쿠키 제거
+    res.json({ success: true });
+  });
 });
