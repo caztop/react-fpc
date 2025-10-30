@@ -4,34 +4,86 @@ function InquiryForm() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [posts, setPosts] = useState([]);
+  const [apiBase, setApiBase] = useState(null);
 
-  const loadPosts = async () => {
-    const res = await fetch('/api/public-posts');
-    const data = await res.json();
-    setPosts(data.slice(-10).reverse());
+  const candidateUrls = [
+    'https://fpc-ws-9.onrender.com'
+  ];
+
+  // 작동하는 백엔드 주소 탐색
+  const findWorkingBackend = async () => {
+    for (const base of candidateUrls) {
+      try {
+        const res = await fetch(`${base}/api/public-posts`);
+        if (res.ok) {
+          const data = await res.json();
+          console.log(`✅ 작동하는 백엔드 주소: ${base}`);
+          setApiBase(base);
+          setPosts(data.slice(-10).reverse());
+          return;
+        }
+      } catch (err) {
+        console.warn(`❌ 실패: ${base}`, err);
+      }
+    }
+    console.error('❌ 작동하는 백엔드 주소를 찾을 수 없습니다.');
   };
 
+  // 글 등록
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await fetch('/api/posts', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ title, content }),
-    });
-    setTitle('');
-    setContent('');
-    loadPosts();
+    if (!apiBase) {
+      alert('백엔드 서버를 찾을 수 없습니다.');
+      return;
+    }
+
+    try {
+      const res = await fetch(`${apiBase}/api/posts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ title, content }),
+      });
+      const result = await res.json();
+      alert(result.message);
+      setTitle('');
+      setContent('');
+      loadPosts(apiBase);
+    } catch (error) {
+      console.error('글 등록 실패:', error);
+      alert('글 등록 중 오류가 발생했습니다.');
+    }
   };
 
+  // 글 목록 불러오기
+  const loadPosts = async (base) => {
+    try {
+      const res = await fetch(`${base}/api/public-posts`);
+      const data = await res.json();
+      setPosts(data.slice(-10).reverse());
+    } catch (error) {
+      console.error('글 목록 불러오기 실패:', error);
+    }
+  };
+
+  // 백엔드 주소 탐색 시작
   useEffect(() => {
-    loadPosts();
+    findWorkingBackend();
   }, []);
+
+  // 주소가 설정되면 글 목록 불러오기
+  useEffect(() => {
+    if (apiBase) {
+      loadPosts(apiBase);
+    }
+  }, [apiBase]);
 
   return (
     <div id="postarea">
       <h3>📋 문의사항</h3>
-      <h5 id="postans">문의사항에 대한 답변을 받기 위해서는 이메일 또는 전화번호만 남겨 주시고 이름이나 기타 개인정보는 기재하지 마시기 바랍니다.</h5>
+      <h5 id="postans">
+        문의사항에 대한 답변을 받기 위해서는 이메일 또는 전화번호만 남겨 주시고 이름이나 기타 개인정보는 기재하지 마시기 바랍니다.
+      </h5>
       <form onSubmit={handleSubmit}>
         <input
           id="posttitle"
@@ -57,7 +109,9 @@ function InquiryForm() {
         <button type="submit"><h4>문의사항 등록</h4></button>
       </form>
       <h3>📝 등록한 글 목록</h3>
-      <h5 id="postans">본 사이트와 관련이 없거나 문의사항이 해소된 글은 예고 없이 삭제될 수 있습니다.</h5>
+      <h5 id="postans">
+        본 사이트와 관련이 없거나 문의사항이 해소된 글은 예고 없이 삭제될 수 있습니다.
+      </h5>
       <div id="posts">
         {posts.map((post, i) => (
           <div className="post" key={i}>
