@@ -54,6 +54,7 @@
 
   <div id="posts" style="display: none;">로딩 중...</div>
   <button id="logoutBtn" style="display: none;">로그아웃</button>
+  <button id="downloadBtn" style="display: none;">문의글 다운로드</button>
 
   <script>
     document.getElementById('loginForm').addEventListener('submit', async function(e) {
@@ -148,6 +149,24 @@
         alert('수정 실패');
       }
     }
+
+    document.getElementById('downloadBtn').addEventListener('click', async function () {
+    try {
+      const res = await fetch('/api/posts', { credentials: 'include' });
+      if (!res.ok) throw new Error('다운로드 실패');
+      const data = await res.json();
+
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'posts.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      alert('다운로드 중 오류가 발생했습니다.');
+    }
+  });
 
     document.getElementById('logoutBtn').addEventListener('click', async function () {
      try {
