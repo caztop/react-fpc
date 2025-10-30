@@ -75,6 +75,8 @@
           document.getElementById('loginSection').style.display = 'none';
           document.getElementById('posts').style.display = 'block';
           loadPosts();
+          document.getElementById('logoutBtn').style.display = 'block';
+          document.getElementById('downloadBtn').style.display = 'block';
         } else {
           alert(result.message || '로그인 실패');
         }
