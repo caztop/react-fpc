@@ -7,7 +7,7 @@ function InquiryForm() {
   const [apiBase, setApiBase] = useState(null);
 
   const candidateUrls = [
-    'https://fpc-ws-9.onrender.com'
+    'https://react-fpc.onrender.com'
   ];
 
   // 작동하는 백엔드 주소 탐색

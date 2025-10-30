@@ -13,7 +13,7 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 
 // CORS 설정 (세션 쿠키 허용)
 app.use(cors({
-  origin: 'http://fpc-ws.netlify.app', // 실제 프론트 주소로 변경 가능
+  origin: 'http://fpc-wp.netlify.app',
   credentials: true
 }));
 
