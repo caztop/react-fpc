@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>관리자 페이지</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    .post {
+      border-bottom: 1px solid #ccc;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .post strong {
+      font-size: 1.1em;
+      color: #007acc;
+    }
+    .post small {
+      color: #666;
+      font-size: 0.9em;
+    }
+    .editable-content, strong[contenteditable="true"] {
+      display: block;
+      margin: 5px 0;
+      padding: 5px;
+      border: 1px dashed #ccc;
+      border-radius: 3px;
+      background-color: #fefefe;
+    }
+    button {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔐 관리자 게시판</h1>
+
+  <div id="loginSection">
+    <h2>로그인</h2>
+    <form id="loginForm">
+      <input type="password" id="password" placeholder="비밀번호 입력" required>
+      <button type="submit">로그인</button>
+    </form>
+  </div>
+
+  <div id="posts" style="display: none;">로딩 중...</div>
+  <button id="logoutBtn" style="display: none;">로그아웃</button>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('/admin-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ password })
+        });
+
+        const result = await res.json();
+
+        if (res.ok && result.success) {
+          document.getElementById('loginSection').style.display = 'none';
+          document.getElementById('posts').style.display = 'block';
+          loadPosts();
+        } else {
+          alert(result.message || '로그인 실패');
+        }
+      } catch (err) {
+        alert('서버 오류가 발생했습니다.');
+      }
+
+      document.getElementById('logoutBtn').style.display = 'block';
+    });
+
+    async function loadPosts() {
+      try {
+        const res = await fetch('/api/posts', {
+          method: 'GET',
+          credentials: 'include'
+        });
+        if (!res.ok) throw new Error('서버 오류');
+        const posts = await res.json();
+        const container = document.getElementById('posts');
+        container.innerHTML = '';
+
+        for (let i = posts.length - 1; i >= 0; i--) {
+          const post = posts[i];
+          const div = document.createElement('div');
+          div.className = 'post';
+          div.id = `post-${i}`;
+          div.innerHTML = `
+            <strong contenteditable="true">${post.title}</strong>
+            <p contenteditable="true" class="editable-content">${post.content}</p>
+            <small>${new Date(post.date).toLocaleString()}</small><br>
+            <button onclick="updatePost(${i})">수정</button>
+            <button onclick="deletePost(${i})">삭제</button>
+          `;
+          container.appendChild(div);
+        } // ✅ for 루프 닫기
+
+      } catch (err) {
+        document.getElementById('posts').innerHTML = '글을 불러오는 중 오류가 발생했습니다.';
+      }
+    }
+
+    async function deletePost(index) {
+      if (!confirm('정말 삭제하시겠습니까?')) return;
+      const res = await fetch(`/api/posts/${index}`, {
+        method: 'DELETE',
+        credentials: 'include'
+      });
+      if (res.ok) {
+        alert('삭제 완료');
+        loadPosts();
+      } else {
+        alert('삭제 실패');
+      }
+    }
+
+    async function updatePost(index) {
+      const postDiv = document.getElementById(`post-${index}`);
+      const title = postDiv.querySelector('strong').textContent.trim();
+      const content = postDiv.querySelector('.editable-content').textContent.trim();
+
+      const res = await fetch(`/api/posts/${index}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ title, content })
+      });
+
+      if (res.ok) {
+        alert('수정 완료');
+        loadPosts();
+      } else {
+        alert('수정 실패');
+      }
+    }
+
+    document.getElementById('logoutBtn').addEventListener('click', async function () {
+     try {
+       const res = await fetch('/admin-logout', {
+         method: 'POST',
+        credentials: 'include'
+       });
+
+       if (res.ok) {
+         alert('로그아웃 되었습니다.');
+         location.reload(); // 페이지 새로고침으로 로그인 화면으로 복귀
+       } else {
+         alert('로그아웃 실패');
+       }
+     } catch (err) {
+       alert('서버 오류가 발생했습니다.');
+     }
+   });
+  </script>
+</body>
+</html>
