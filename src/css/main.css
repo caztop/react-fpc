@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 body {
   background-color: #F1F0E4;
   font-family: 'Noto Sans KR', sans-serif;
