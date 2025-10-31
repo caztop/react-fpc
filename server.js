@@ -29,7 +29,11 @@ app.use(express.static('public'));
 app.use(session({
   secret: 'your_secret_key',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: {
+    secure: true,
+    sameSite: 'none'
+  }
 }));
 
 // 관리자 로그인
