@@ -105,15 +105,27 @@ app.get('/api/public-posts', async (req, res) => {
 
 // 글 삭제 (관리자 전용)
 app.delete('/api/posts/:id', async (req, res) => {
-  if (!req.session.isAdmin) return res.status(403).send({ message: '권한 없음' });
+  if (!req.session.isAdmin) {
+    return res.status(403).send({ message: '권한 없음' });
+  }
+
+  const { id } = req.params;
+  if (!id || id.length !== 24) {
+    return res.status(400).send({ message: '잘못된 요청입니다. ID가 유효하지 않습니다.' });
+  }
 
   try {
-    await Post.findByIdAndDelete(req.params.id);
+    const deleted = await Post.findByIdAndDelete(id);
+    if (!deleted) {
+      return res.status(404).send({ message: '해당 글을 찾을 수 없습니다.' });
+    }
     res.send({ message: '삭제 완료' });
   } catch (err) {
+    console.error('🔴 삭제 중 오류 발생:', err); // ✅ 로그 추가
     res.status(500).send({ message: '삭제 실패' });
   }
 });
+
 
 // 글 수정 (관리자 전용)
 app.put('/api/posts/:id', async (req, res) => {
@@ -132,6 +144,7 @@ app.put('/api/posts/:id', async (req, res) => {
     });
     res.send({ message: '수정 완료' });
   } catch (err) {
+    console.error('🔴 수정 중 오류 발생:', err); // ✅ 로그 추가
     res.status(500).send({ message: '수정 실패' });
   }
 });
