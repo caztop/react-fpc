@@ -91,22 +91,22 @@ function InquiryForm() {
           name="title"
           placeholder="제목"
           required
-          maxLength={100}
+          maxLength={50}
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        <p id="titleCount">{title.length} / 100</p>
+        <p id="titleCount">{title.length} / 50</p>
         <textarea
           id="postcon"
           name="content"
           placeholder="내용"
           required
-          maxLength={1000}
+          maxLength={500}
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <p id="conCount">{content.length} / 1000</p>
-        <button type="submit"><h4>문의사항 등록</h4></button>
+        <p id="conCount">{content.length} / 500</p>
+        <button id="submitBtn" type="submit">문의사항 등록</button>
       </form>
       <h3>📝 등록한 글 목록</h3>
       <h5 id="postans">

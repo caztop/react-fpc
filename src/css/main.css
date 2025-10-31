@@ -34,6 +34,7 @@ body {
 }
 
 .logo {
+  margin: 0;
   height: 4rem;
   width: auto;
 }
@@ -236,6 +237,15 @@ button.next {
   padding: 10px;
   background-color: #DDE6ED;
   border: 1px solid #526D82;
+  cursor: pointer;
+}
+
+#submitBtn {
+  padding: 6px 12px;
+  font-size: 1rem;
+  background-color: #526D82;
+  color: white;
+  border: none;
   cursor: pointer;
 }
 
