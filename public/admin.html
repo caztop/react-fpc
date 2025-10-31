@@ -9,9 +9,7 @@
       padding: 20px;
       background-color: #f9f9f9;
     }
-    h1 {
-      color: #333;
-    }
+    h1 { color: #333; }
     .post {
       border-bottom: 1px solid #ccc;
       margin-bottom: 15px;
@@ -36,9 +34,7 @@
       border-radius: 3px;
       background-color: #fefefe;
     }
-    button {
-      margin-right: 5px;
-    }
+    button { margin-right: 5px; }
   </style>
 </head>
 <body>
@@ -56,135 +52,137 @@
   <button id="downloadBtn" style="display: none;">문의글 다운로드</button>
 
   <script>
-   const API_BASE = 'https://react-fpc.onrender.com';
+    const API_BASE = 'https://react-fpc.onrender.com';
 
-   document.getElementById('loginForm').addEventListener('submit', async function(e) {
-     e.preventDefault();
-     const password = document.getElementById('password').value;
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
 
-     try {
-       const res = await fetch(`${API_BASE}/admin-login`, {
-         method: 'POST',
-         headers: { 'Content-Type': 'application/json' },
-         credentials: 'include',
-         body: JSON.stringify({ password })
-       });
+      try {
+        const res = await fetch(`${API_BASE}/admin-login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ password })
+        });
 
-       const result = await res.json();
+        const result = await res.json();
 
-       if (res.ok && result.success) {
-         document.getElementById('loginSection').style.display = 'none';
-         document.getElementById('posts').style.display = 'block';
-         loadPosts();
-         document.getElementById('logoutBtn').style.display = 'block';
-         document.getElementById('downloadBtn').style.display = 'block';
-       } else {
-         alert(result.message || '로그인 실패');
-       }
-     } catch (err) {
-       alert('서버 오류가 발생했습니다.');
-     }
-   });
+        if (res.ok && result.success) {
+          document.getElementById('loginSection').style.display = 'none';
+          document.getElementById('posts').style.display = 'block';
+          loadPosts();
+          document.getElementById('logoutBtn').style.display = 'block';
+          document.getElementById('downloadBtn').style.display = 'block';
+        } else {
+          alert(result.message || '로그인 실패');
+        }
+      } catch (err) {
+        alert('서버 오류가 발생했습니다.');
+      }
+    });
 
-   async function loadPosts() {
-     try {
-       const res = await fetch(`${API_BASE}/api/posts`, {
-         method: 'GET',
-         credentials: 'include'
-       });
-       if (!res.ok) throw new Error('서버 오류');
-       const posts = await res.json();
-       const container = document.getElementById('posts');
-       container.innerHTML = '';
+    async function loadPosts() {
+      try {
+        const res = await fetch(`${API_BASE}/api/posts`, {
+          method: 'GET',
+          credentials: 'include'
+        });
+        if (!res.ok) throw new Error('서버 오류');
+        const posts = await res.json();
+        const container = document.getElementById('posts');
+        container.innerHTML = '';
 
-       for (let i = posts.length - 1; i >= 0; i--) {
-         const post = posts[i];
-         const div = document.createElement('div');
-         div.className = 'post';
-         div.id = `post-${i}`;
-         div.innerHTML = `
-           <strong contenteditable="true">${post.title}</strong>
-           <p contenteditable="true" class="editable-content">${post.content}</p>
-           <small>${new Date(post.date).toLocaleString()}</small><br>
-           <button onclick="updatePost(${i})">수정</button>
-           <button onclick="deletePost(${i})">삭제</button>
-         `;
-         container.appendChild(div);
-       }
-     } catch (err) {
-       document.getElementById('posts').innerHTML = '글을 불러오는 중 오류가 발생했습니다.';
-     }
-   }
+        for (let i = posts.length - 1; i >= 0; i--) {
+          const post = posts[i];
+          const div = document.createElement('div');
+          div.className = 'post';
+          div.id = `post-${post._id}`;
+          div.innerHTML = `
+            <strong contenteditable="true">${post.title}</strong>
+            <p contenteditable="true" class="editable-content">${post.content}</p>
+            <small>${new Date(post.date).toLocaleString()}</small><br>
+            <button onclick="updatePost('${post._id}')">수정</button>
+            <button onclick="deletePost('${post._id}')">삭제</button>
+          `;
+          container.appendChild(div);
+        }
+      } catch (err) {
+        document.getElementById('posts').innerHTML = '글을 불러오는 중 오류가 발생했습니다.';
+      }
+    }
 
-   async function deletePost(index) {
-     if (!confirm('정말 삭제하시겠습니까?')) return;
-     const res = await fetch(`${API_BASE}/api/posts/${index}`, {
-       method: 'DELETE',
-       credentials: 'include'
-     });
-     if (res.ok) {
-       alert('삭제 완료');
-       loadPosts();
-     } else {
-       alert('삭제 실패');
-     }
-   }
+    async function updatePost(id) {
+      const postDiv = document.getElementById(`post-${id}`);
+      const title = postDiv.querySelector('strong').textContent.trim();
+      const content = postDiv.querySelector('.editable-content').textContent.trim();
 
-   async function updatePost(index) {
-     const postDiv = document.getElementById(`post-${index}`);
-     const title = postDiv.querySelector('strong').textContent.trim();
-     const content = postDiv.querySelector('.editable-content').textContent.trim();
+      const res = await fetch(`${API_BASE}/api/posts/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ title, content })
+      });
 
-     const res = await fetch(`${API_BASE}/api/posts/${index}`, {
-       method: 'PUT',
-       headers: { 'Content-Type': 'application/json' },
-       credentials: 'include',
-       body: JSON.stringify({ title, content })
-     });
+      if (res.ok) {
+        alert('수정 완료');
+        loadPosts();
+      } else {
+        alert('수정 실패');
+      }
+    }
 
-     if (res.ok) {
-       alert('수정 완료');
-       loadPosts();
-     } else {
-       alert('수정 실패');
-     }
-   }
+    async function deletePost(id) {
+      if (!confirm('정말 삭제하시겠습니까?')) return;
 
-   document.getElementById('downloadBtn').addEventListener('click', async function () {
-     try {
-       const res = await fetch(`${API_BASE}/api/posts`, { credentials: 'include' });
-       if (!res.ok) throw new Error('다운로드 실패');
-       const data = await res.json();
+      const res = await fetch(`${API_BASE}/api/posts/${id}`, {
+        method: 'DELETE',
+        credentials: 'include'
+      });
 
-       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-       const url = URL.createObjectURL(blob);
-       const a = document.createElement('a');
-       a.href = url;
-       a.download = 'posts.json';
-       a.click();
-       URL.revokeObjectURL(url);
-     } catch (err) {
-       alert('다운로드 중 오류가 발생했습니다.');
-     }
-   });
+      if (res.ok) {
+        alert('삭제 완료');
+        loadPosts();
+      } else {
+        alert('삭제 실패');
+      }
+    }
 
-   document.getElementById('logoutBtn').addEventListener('click', async function () {
-     try {
-       const res = await fetch(`${API_BASE}/admin-logout`, {
-         method: 'POST',
-         credentials: 'include'
-       });
+    document.getElementById('downloadBtn').addEventListener('click', async function () {
+      try {
+        const res = await fetch(`${API_BASE}/api/posts`, { credentials: 'include' });
+        if (!res.ok) throw new Error('다운로드 실패');
+        const data = await res.json();
 
-       if (res.ok) {
-         alert('로그아웃 되었습니다.');
-         location.reload();
-       } else {
-         alert('로그아웃 실패');
-       }
-     } catch (err) {
-       alert('서버 오류가 발생했습니다.');
-     }
-   });
- </script>
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'posts.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      } catch (err) {
+        alert('다운로드 중 오류가 발생했습니다.');
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', async function () {
+      try {
+        const res = await fetch(`${API_BASE}/admin-logout`, {
+          method: 'POST',
+          credentials: 'include'
+        });
+
+        if (res.ok) {
+          alert('로그아웃 되었습니다.');
+          location.reload();
+        } else {
+          alert('로그아웃 실패');
+        }
+      } catch (err) {
+        alert('서버 오류가 발생했습니다.');
+      }
+    });
+  </script>
 </body>
 </html>
