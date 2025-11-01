@@ -60,7 +60,7 @@ function InquiryForm() {
     try {
       const res = await fetch(`${base}/api/public-posts`);
       const data = await res.json();
-      setPosts(data.slice(-10).reverse());
+      setPosts(data.slice(-10));
     } catch (error) {
       console.error('글 목록 불러오기 실패:', error);
     }
