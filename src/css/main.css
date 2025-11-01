@@ -410,16 +410,16 @@ button.next {
 
   .slide h2 {
   color: black;
-}
+  }
 
   .slide li {
   color: black;
-}
+  }
 
-#blank2 {
-  background-color: black;
-  border: none;
-}
+  #blank2 {
+    background-color: #121212;
+    border-color: #121212;
+  }
 
   .right-sidebar {
     background-color: #FFF9AF;
