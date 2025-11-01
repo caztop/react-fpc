@@ -19,10 +19,22 @@ mongoose.connect(process.env.MONGODB_URI);
 const Post = require('./models/Post');
 
 // 미들웨어 설정
+const allowedOrigins = [
+  'https://fpc-wp.netlify.app',
+  'https://www.fpc-wp.com'
+];
+
 app.use(cors({
-  origin: 'https://fpc-wp.netlify.app',
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS 오류: 허용되지 않은 origin'));
+    }
+  },
   credentials: true
 }));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
