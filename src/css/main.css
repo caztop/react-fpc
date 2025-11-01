@@ -328,7 +328,7 @@ button.next {
   }
 
   .slide li {
-    font-size: 1rem;
+    font-size: 0.7rem;
     padding: 0 5rem;
   }
 
@@ -408,8 +408,25 @@ button.next {
     color: #ECEFF1;
   }
 
+  .slide h2 {
+  color: black;
+}
+
+  .slide li {
+  color: black;
+}
+
+#blank2 {
+  background-color: black;
+  border: none;
+}
+
   .right-sidebar {
     background-color: #FFF9AF;
     color: black;
+  }
+
+  #submitBtn {
+    background-color: #2C3E50;
   }
 }
