@@ -39,7 +39,6 @@ app.use(session({
   cookie: {
     secure: true,
     sameSite: 'none',
-    domain: 'fpc-wp.com'
   }
 }));
 
