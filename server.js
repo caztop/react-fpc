@@ -5,7 +5,6 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
 const path = require('path');
-const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -51,27 +50,6 @@ app.use(session({
   }
 }));
 
-// 이메일 전송기 설정 (Outlook SMTP)
-const transporter = nodemailer.createTransport({
-  host: 'smtp.office365.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.ADMIN_EMAIL,
-    pass: process.env.EMAIL_PASSWORD
-  }
-});
-
-// 이메일 알림 함수
-const sendNotification = async (title, content) => {
-  await transporter.sendMail({
-    from: process.env.ADMIN_EMAIL,
-    to: process.env.ADMIN_EMAIL,
-    subject: `[새 문의사항] ${title}`,
-    text: content
-  });
-};
-
 // 관리자 로그인
 app.post('/admin-login', (req, res) => {
   const { password } = req.body;
@@ -111,10 +89,6 @@ app.post('/api/posts', async (req, res) => {
   try {
     const newPost = new Post({ title, content });
     await newPost.save();
-
-    // 📧 이메일 알림 전송
-    await sendNotification(title, content);
-
     res.status(200).send({ message: '글이 저장되었습니다.' });
   } catch (err) {
     console.error('🔴 저장 중 오류 발생:', err);
