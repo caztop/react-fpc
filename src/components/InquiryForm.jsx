@@ -37,6 +37,11 @@ function InquiryForm() {
       return;
     }
 
+    if (title.length > 50 || content.length > 500) {
+      alert('제목은 50자, 내용은 500자 이하로 작성해주세요.');
+      return;
+    }
+
     try {
       const res = await fetch(`${apiBase}/api/posts`, {
         method: 'POST',
