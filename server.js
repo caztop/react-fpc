@@ -26,7 +26,7 @@ const allowedOrigins = [
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.some(o => origin.startsWith(o))) {
       callback(null, true);
     } else {
       callback(new Error('CORS 오류: 허용되지 않은 origin'));
@@ -44,7 +44,8 @@ app.use(session({
   saveUninitialized: true,
   cookie: {
     secure: true,
-    sameSite: 'none'
+    sameSite: 'none',
+    domain: 'fpc-wp.com'
   }
 }));
 
@@ -80,8 +81,8 @@ app.get('/admin', (req, res) => {
 // 글 등록 (모든 사용자 가능)
 app.post('/api/posts', async (req, res) => {
   const { title, content } = req.body;
-  if (!title || !content || title.length > 100 || content.length > 1000) {
-    return res.status(400).send({ message: '제목은 100자, 내용은 1,000자 이하로 작성해주세요.' });
+  if (!title || !content || title.length > 50 || content.length > 500) {
+    return res.status(400).send({ message: '제목은 50자, 내용은 500자 이하로 작성해주세요.' });
   }
 
   try {
@@ -162,6 +163,11 @@ app.put('/api/posts/:id', async (req, res) => {
 });
 
 // 서버 실행
+app.post('/api/posts', async (req, res) => {
+  console.log('📩 문의사항 등록 요청 수신:', req.body);
+  console.log('세션 상태:', req.session);
+});
+
 app.listen(PORT, () => {
   console.log(`✅ 서버 실행 중: http://localhost:${PORT}`);
 });
