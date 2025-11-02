@@ -2,8 +2,10 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const cors = require('cors');
 const path = require('path');
+const nodemailer = require('nodemailer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -18,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI);
 // Post 모델 불러오기
 const Post = require('./models/Post');
 
-// 미들웨어 설정
+// CORS 설정
 const allowedOrigins = [
   'https://fpc-wp.netlify.app',
   'https://www.fpc-wp.com'
@@ -32,24 +34,52 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+// 세션 설정 (MongoDB 저장소 사용)
 app.use(session({
-  secret: 'your_secret_key',
+  secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
+  proxy: true,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    ttl: 60 * 60 * 2 // 2시간
+  }),
   cookie: {
     secure: true,
-    sameSite: 'none',
+    sameSite: 'none'
   }
 }));
+
+// 이메일 전송기 설정 (Outlook SMTP)
+const transporter = nodemailer.createTransport({
+  host: 'smtp.office365.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.ADMIN_EMAIL,
+    pass: process.env.EMAIL_PASSWORD
+  }
+});
+
+// 이메일 알림 함수
+const sendNotification = async (title, content) => {
+  await transporter.sendMail({
+    from: process.env.ADMIN_EMAIL,
+    to: process.env.ADMIN_EMAIL,
+    subject: `[새 문의사항] ${title}`,
+    text: content
+  });
+};
 
 // 관리자 로그인
 app.post('/admin-login', (req, res) => {
   const { password } = req.body;
   if (password === ADMIN_PASSWORD) {
     req.session.isAdmin = true;
-    res.status(200).send({ success: true, message: '로그인 성공' }); // ✅ send로 변경
+    res.status(200).send({ success: true, message: '로그인 성공' });
   } else {
-    res.status(401).send({ success: false, message: '비밀번호가 틀렸습니다.' }); // ✅ send로 변경
+    res.status(401).send({ success: false, message: '비밀번호가 틀렸습니다.' });
   }
 });
 
@@ -81,8 +111,13 @@ app.post('/api/posts', async (req, res) => {
   try {
     const newPost = new Post({ title, content });
     await newPost.save();
+
+    // 📧 이메일 알림 전송
+    await sendNotification(title, content);
+
     res.status(200).send({ message: '글이 저장되었습니다.' });
   } catch (err) {
+    console.error('🔴 저장 중 오류 발생:', err);
     res.status(500).send({ message: '저장 중 오류 발생' });
   }
 });
@@ -127,11 +162,10 @@ app.delete('/api/posts/:id', async (req, res) => {
     }
     res.send({ message: '삭제 완료' });
   } catch (err) {
-    console.error('🔴 삭제 중 오류 발생:', err); // ✅ 로그 추가
+    console.error('🔴 삭제 중 오류 발생:', err);
     res.status(500).send({ message: '삭제 실패' });
   }
 });
-
 
 // 글 수정 (관리자 전용)
 app.put('/api/posts/:id', async (req, res) => {
@@ -150,17 +184,12 @@ app.put('/api/posts/:id', async (req, res) => {
     });
     res.send({ message: '수정 완료' });
   } catch (err) {
-    console.error('🔴 수정 중 오류 발생:', err); // ✅ 로그 추가
+    console.error('🔴 수정 중 오류 발생:', err);
     res.status(500).send({ message: '수정 실패' });
   }
 });
 
 // 서버 실행
-app.post('/api/posts', async (req, res) => {
-  console.log('📩 문의사항 등록 요청 수신:', req.body);
-  console.log('세션 상태:', req.session);
-});
-
 app.listen(PORT, () => {
   console.log(`✅ 서버 실행 중: http://localhost:${PORT}`);
 });
