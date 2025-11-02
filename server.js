@@ -25,13 +25,7 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.some(o => origin.startsWith(o))) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS 오류: 허용되지 않은 origin'));
-    }
-  },
+  origin: true, // 모든 origin 허용 (테스트용)
   credentials: true
 }));
 
