@@ -301,13 +301,6 @@ button.next {
     font-size: 1.5rem;
     padding: 0.4rem;
   }
-
-  .box {
-    width: 100%;
-    height: auto;
-    font-size: 2rem;
-    padding: 1rem;
-  }
 }
 
 @media (max-width: 850px) {
@@ -365,7 +358,7 @@ button.next {
   }
 
   .box {
-    width: 100%;
+    width: 90%;
     height: auto;
     font-size: 2rem;
     padding: 1rem;
