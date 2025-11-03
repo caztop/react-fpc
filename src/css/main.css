@@ -337,13 +337,11 @@ button.next {
 
   #slide-name {
     margin: 1rem 3rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
-  .slider-container {
-    margin: 0%;
-    width: 95%;
-    height: auto;
+  #slider-container {
+    justify-content: center;
   }
 
   .slider {
@@ -351,9 +349,7 @@ button.next {
   }
 
   .slide {
-    height: auto;
     padding: 0.5rem 0;
-    margin: 0 auto;
   }
 
   .slide h2 {
@@ -361,8 +357,8 @@ button.next {
   }
 
   .slide li {
-    font-size: 1rem;
-    padding: 0 5rem;
+    font-size: 0.9rem;
+    padding: 0 3rem;
   }
 
   #blank2 {
@@ -370,6 +366,7 @@ button.next {
   }
 
   .right-sidebar {
+    justify-content: center;
     margin: 0%;
     width: 95%;
     font-size: 1rem;
