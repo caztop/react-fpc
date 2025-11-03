@@ -360,18 +360,18 @@ button.next {
 
   .slide li {
     font-size: 0.9rem;
-    padding: 0 3rem;
+    padding: 0 2rem;
   }
 
   #blank2 {
     display: none;
   }
 
-  #right-sidebars {
+  #right-sidebar {
     justify-content: center;
   }
+
   .right-sidebar {
-    justify-content: center;
     margin: 0%;
     width: 95%;
     font-size: 1rem;
@@ -394,7 +394,7 @@ button.next {
   }
 
   .box {
-    width: 90%;
+    width: 95%;
     height: auto;
     font-size: 1rem;
     padding: 1rem;
