@@ -283,6 +283,17 @@ button.next {
     width: 25%;
   }
 
+  #slide-name {
+    position: relative;
+    left: 0;
+    transform: none;
+    margin-bottom: 1rem;
+  }
+
+  .slider-container {
+    height: auto;
+  }
+
   .slide {
     line-height: 3;
     padding: 1.5rem 0;
@@ -303,6 +314,7 @@ button.next {
   }
 }
 
+/* 📱 모바일 대응 */
 @media (max-width: 850px) {
   .nav-content h1 {
     font-size: 2.2rem;
@@ -324,13 +336,22 @@ button.next {
     font-size: 1rem;
   }
 
+  .slider-container {
+    height: auto;
+  }
+
   .slide {
+    height: auto;
     padding: 0.5rem 0;
   }
 
+  .slide h2 {
+    font-size: 1.3rem;
+  }
+
   .slide li {
-    font-size: 0.7rem;
-    padding: 0 5rem;
+    font-size: 1rem;
+    padding: 0% 5rem;
   }
 
   #blank2 {
@@ -360,17 +381,13 @@ button.next {
   .box {
     width: 90%;
     height: auto;
-    font-size: 2rem;
+    font-size: 1rem;
     padding: 1rem;
   }
 
   .box img {
+    width: auto;
     height: 4rem;
-  }
-
-  #posttitle,
-  #postcon {
-    width: 100%;
   }
 
   #footer {
@@ -381,6 +398,10 @@ button.next {
 
 /* 🌙 다크 모드 대응 */
 @media (prefers-color-scheme: dark) {
+  .main-layout {
+    background-color: #121212;
+  }
+  
   body {
     background-color: #121212;
     color: #E0E0E0;
