@@ -340,18 +340,25 @@ button.next {
     font-size: 1.3rem;
   }
 
-  #slider-container {
+  .slider-container {
+    display: flex;
     justify-content: center;
+    width: 100%;
+    overflow: hidden;
   }
 
   .slider {
-    justify-content: center;
+    display: flex;
     width: 100%;
     min-width: 100%;
+    transition: transform 0.5s ease-in-out;
   }
 
   .slide {
-    padding: 0.5rem 0;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
   .slide h2 {
@@ -367,16 +374,19 @@ button.next {
     display: none;
   }
 
-  #right-sidebar {
-    justify-content: center;
+  .right-sidebars {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .right-sidebar {
-    margin: 0%;
-    width: 95%;
-    font-size: 1rem;
-    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    width: 95%;
+    margin: 0 auto;
+    padding: 0.8rem;
   }
 
   .logo-box {
