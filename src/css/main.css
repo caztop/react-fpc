@@ -346,6 +346,8 @@ button.next {
 
   .slider {
     justify-content: center;
+    width: 100%;
+    min-width: 100%;
   }
 
   .slide {
@@ -365,6 +367,9 @@ button.next {
     display: none;
   }
 
+  #right-sidebars {
+    justify-content: center;
+  }
   .right-sidebar {
     justify-content: center;
     margin: 0%;
