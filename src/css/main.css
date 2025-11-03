@@ -310,7 +310,7 @@ button.next {
 }
 
 /* 📱 모바일 대응 */
-@media (max-width: 599px) {
+@media (max-width: 899px) {
   body {
     width: 100%;
     overflow-x: hidden;
@@ -346,9 +346,14 @@ button.next {
     height: auto;
   }
 
+  .slider {
+    justify-content: center;
+  }
+
   .slide {
     height: auto;
     padding: 0.5rem 0;
+    margin: 0 auto;
   }
 
   .slide h2 {
@@ -365,7 +370,6 @@ button.next {
   }
 
   .right-sidebar {
-    display: flex;
     margin: 0%;
     width: 95%;
     font-size: 1rem;
@@ -405,7 +409,7 @@ button.next {
   }
 }
 
-/* 📱 태블릿 대응 (600px ~ 899px) */
+/* 📱 태블릿 대응 (600px ~ 899px)     이 부분은 나중에 필요한 경우 활용함
 @media (min-width: 600px) and (max-width: 899px) {
   .main-layout {
     flex-direction: column;
@@ -420,6 +424,20 @@ button.next {
   .content {
     width: 100%;
     padding: 0;
+  }
+
+  .slider {
+    justify-content: center;
+  }
+
+  .slide {
+    height: auto;
+    padding: 0.5rem 0;
+    margin: 0 auto;
+  }
+
+  #blank2 {
+    display: none;
   }
 
   .right-sidebars {
@@ -468,6 +486,7 @@ button.next {
     padding-left: 5rem;
   }
 }
+*/
 
 /* 🌙 다크 모드 대응 */
 @media (prefers-color-scheme: dark) {
