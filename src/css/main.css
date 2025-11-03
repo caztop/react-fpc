@@ -1,11 +1,5 @@
-/* 기본 설정 */
 * {
   box-sizing: border-box;
-}
-
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
 }
 
 body {
@@ -451,4 +445,78 @@ button.next {
   #submitBtn {
     background-color: #2C3E50;
   }
+}
+
+/* 📱 태블릿 대응 (600px ~ 899px) */
+@media (min-width: 600px) and (max-width: 899px) {
+  .main-layout {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  #left-sidebar {
+    width: 100%;
+    display: block;
+  }
+
+  .content {
+    width: 100%;
+    padding: 0;
+  }
+
+  .right-sidebars {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .right-sidebar {
+    width: 45%;
+    margin: 0.5rem;
+  }
+
+  .nav-content h1 {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  .nav-content p {
+    font-size: 1rem;
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .box {
+    width: 45%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  .box img {
+    height: 4rem;
+  }
+
+  #slide-name {
+    margin: 1rem 5rem;
+    font-size: 1.1rem;
+  }
+
+  .slide h2 {
+    font-size: 1.5rem;
+  }
+
+  .slide li {
+    font-size: 1.1rem;
+    padding-left: 2rem;
+  }
+}
+
+/* 📱 모바일 화면 넘침 방지 */
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
 }
