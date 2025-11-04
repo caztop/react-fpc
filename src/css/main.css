@@ -421,7 +421,75 @@ button.next {
   }
 }
 
-/* 📱 태블릿 대응 (600px ~ 899px)     이 부분은 나중에 필요한 경우 활용함
+/* 🌙 다크 모드 대응 */
+@media (prefers-color-scheme: dark) {
+  .main-layout {
+    background-color: #121212;
+  }
+  
+  body {
+    background-color: #121212;
+    color: #E0E0E0;
+  }
+
+  .container {
+    background-color: #1E1E1E;
+  }
+
+  #header {
+    background-color: #2C3E50;
+  }
+
+  .nav-content p {
+    color: #B0BEC5;
+  }
+
+  .box {
+    background-color: #2C3E50;
+    border-color: #90A4AE;
+    color: #ECEFF1;
+  }
+
+  #slide-name {
+    background-color: #37474F;
+    color: #ECEFF1;
+  }
+
+  .slide h2 {
+  color: black;
+  }
+
+  .slide li {
+  color: black;
+  }
+
+  #blank2 {
+    background-color: #121212;
+    border: none;
+  }
+
+  .right-sidebar {
+    background-color: #FFF9AF;
+    color: black;
+  }
+
+  #posttitle {
+    font-size: 1.1rem;
+    color: black;
+  }
+
+  #postcon {
+    font-size: 1rem;
+    color: black;
+  }
+
+  #submitBtn {
+    background-color: #2C3E50;
+  }
+}
+
+/* 📱 태블릿 대응 (600px ~ 899px)     이 부분은 나중에 필요한 경우 활용하고,
+모바일 대응 코드를 복사해서 쓰고 @media (min-width: 600px) and (max-width: 899px) 부분만 상황에 따라 크기조절
 @media (min-width: 600px) and (max-width: 899px) {
   .main-layout {
     flex-direction: column;
@@ -499,60 +567,3 @@ button.next {
   }
 }
 */
-
-/* 🌙 다크 모드 대응 */
-@media (prefers-color-scheme: dark) {
-  .main-layout {
-    background-color: #121212;
-  }
-  
-  body {
-    background-color: #121212;
-    color: #E0E0E0;
-  }
-
-  .container {
-    background-color: #1E1E1E;
-  }
-
-  #header {
-    background-color: #2C3E50;
-  }
-
-  .nav-content p {
-    color: #B0BEC5;
-  }
-
-  .box {
-    background-color: #2C3E50;
-    border-color: #90A4AE;
-    color: #ECEFF1;
-  }
-
-  #slide-name {
-    background-color: #37474F;
-    color: #ECEFF1;
-  }
-
-  .slide h2 {
-  color: black;
-  }
-
-  .slide li {
-  color: black;
-  }
-
-  #blank2 {
-    background-color: #121212;
-    border: none;
-  }
-
-  .right-sidebar {
-    background-color: #FFF9AF;
-    color: black;
-  }
-
-  #submitBtn {
-    background-color: #2C3E50;
-  }
-}
