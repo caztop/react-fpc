@@ -1,7 +1,19 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import ViteSitemapPlugin from 'vite-plugin-sitemap'; // ✅ default import로 수정
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
-})
+  plugins: [
+    react(),
+    ViteSitemapPlugin({
+      hostname: 'https://www.fpc-wp.com',
+      routes: [
+        '/',
+        '/about',
+        '/consulting',
+        '/education',
+        '/contact'
+      ]
+    })
+  ]
+});
