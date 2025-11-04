@@ -1,4 +1,16 @@
 function Header() {
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "재무설계 컨설팅",
+    "provider": {
+      "@type": "Organization",
+      "name": "FPC",
+      "url": "https://www.fpc-wp.com"
+    },
+    "description": "맞춤형 재무설계 컨설팅 서비스"
+  };
+
   return (
     <header id="header">
       <nav>
@@ -12,6 +24,12 @@ function Header() {
           </p>
         </div>
       </nav>
+
+      {/* 구조화 데이터 삽입 */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+      />
     </header>
   );
 }
