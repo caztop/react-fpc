@@ -87,7 +87,7 @@ app.post('/api/posts', async (req, res) => {
   }
 
   try {
-    const newPost = new Post({ title, content });
+    const newPost = new Post({ title, content, date: new Date() });
     await newPost.save();
     res.status(200).send({ message: '글이 저장되었습니다.' });
   } catch (err) {
