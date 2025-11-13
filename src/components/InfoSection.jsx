@@ -1,11 +1,11 @@
 function InfoSection() {
   const boxes = [
-    { img: 'comerstone.jpg', label: '주춧돌 세우기', url: 'info/comerstone.pdf' },
-    { img: 'chart.png', label: '경제지표', url: 'info/ecoflow.pdf' },
-    { img: 'apartments.png', label: '부동산 시장', url: 'info/property.pdf' },
-    { img: 'tax.jpg', label: '세금', url: 'info/tax.pdf' },
-    { img: 'tsave.png', label: '세제혜택 금융상품', url: 'info/tsave.pdf' },
-    { img: 'fsite.png', label: '재무설계관련 인터넷사이트', url: 'info/fsite.pdf' },
+    { img: 'comerstone.jpg', label: '주춧돌 세우기', url: 'info/comerstone.png' },
+    { img: 'chart.png', label: '경제지표', url: 'info/ecoflow.png' },
+    { img: 'apartments.png', label: '부동산 시장', url: 'info/property.png' },
+    { img: 'tax.jpg', label: '세금', url: 'info/tax.png' },
+    { img: 'tsave.png', label: '세제혜택 금융상품', url: 'info/tsave.png' },
+    { img: 'fsite.png', label: '재무설계관련 인터넷사이트', url: 'info/fsite.png' },
   ];
 
   const handleClick = (url) => window.open(url, '_blank');
