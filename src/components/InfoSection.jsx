@@ -13,7 +13,10 @@ function InfoSection() {
   return (
     <>
       <div id="blank3"></div>
-      <div id="info">정보마당<h5>(조회의 편의성을 위해 일부는 화질저하가 있을 수 있음)</h5></div>
+      <div id="info">
+        <span id="larget">정보마당</span>
+        <span id="smallt">(조회의 편의성을 위해 일부는 화질저하가 있을 수 있음)</span>
+      </div>
       <div className="mbox">
         {boxes.map((box, i) => (
           <div className="box" key={i} onClick={() => handleClick(box.url)}>

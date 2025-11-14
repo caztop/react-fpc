@@ -180,7 +180,15 @@ button.next {
   padding: 0.1rem;
   margin: 20px 9%;
   text-align: left;
+  align-items: baseline;
+}
+
+#larget {
   font-size: 1.2rem;
+}
+
+#smallt {
+  font-size: 0.9rem;
 }
 
 .mbox {
