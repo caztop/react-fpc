@@ -1,6 +1,6 @@
 function InfoSection() {
   const boxes = [
-    { img: 'comerstone.jpg', label: '주춧돌 세우기', url: 'info/comerstone.png' },
+    { img: 'comerstone.jpg', label: '주춧돌 세우기', url: 'info/cornerstone.png' },
     { img: 'chart.png', label: '경제지표', url: 'info/ecoflow.png' },
     { img: 'apartments.png', label: '부동산 시장', url: 'info/property.png' },
     { img: 'tax.jpg', label: '세금', url: 'info/tax.png' },
