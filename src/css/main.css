@@ -407,8 +407,9 @@ button.next {
   }
 
   .mbox {
-    flex-direction: column;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .box {
