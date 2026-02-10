@@ -20,7 +20,7 @@ function RightSidebar() {
         <span>QR을 스캔하거나 클릭</span>
       </div>
 
-      <div className="right-sidebar">오픈 예정</div>
+      <div className="right-sidebar">FPC 공식블로그 곧 오픈</div>
       <div className="right-sidebar">오픈 예정</div>
     </div>
   );
