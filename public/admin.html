@@ -47,9 +47,12 @@
     </form>
   </div>
 
+  <div id="adminControls" style="display:none; margin-bottom:20px;">
+    <button id="logoutBtn">로그아웃</button>
+    <button id="downloadBtn">문의글 다운로드</button>
+  </div>
+
   <div id="posts" style="display: none;">로딩 중...</div>
-  <button id="logoutBtn" style="display: none;">로그아웃</button>
-  <button id="downloadBtn" style="display: none;">문의글 다운로드</button>
 
   <script>
     const API_BASE = 'https://react-fpc.onrender.com';
@@ -105,7 +108,7 @@
             <button onclick="updatePost('${post._id}')">수정</button>
             <button onclick="deletePost('${post._id}')">삭제</button>
           `;
-          container.appendChild(div);
+          container.prepend(div);
         }
       } catch (err) {
         document.getElementById('posts').innerHTML = '글을 불러오는 중 오류가 발생했습니다.';
