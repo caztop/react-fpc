@@ -21,12 +21,12 @@ const Post = require('./models/Post');
 
 // CORS 설정
 const allowedOrigins = [
-  'https://fpc-wp.netlify.app',
+  'https://fpc-wp.com',
   'https://www.fpc-wp.com'
 ];
 
 app.use(cors({
-  origin: true,
+  origin: allowedOrigins,
   credentials: true
 }));
 
