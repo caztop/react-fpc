@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-}
-
 body {
   background-color: #F1F0E4;
   color: #27374D;
@@ -19,7 +15,6 @@ body {
   width: 100%;
   margin: 0 auto;
   background-color: white;
-  height: 100%;
 }
 
 /* Header */
@@ -60,7 +55,6 @@ body {
   flex-direction: column;
   gap: 1rem;
   padding: 0 1rem 0 0;
-  height: 100%;
 }
 
 #left-sidebar img {
@@ -276,24 +270,20 @@ button.next {
   .main-layout {
     width: 100%;
     flex-direction: row;
-    align-items: stretch;
-    height: 100%;
+    align-items: flex-start;
   }
 
   #left-sidebar {
     width: 20%;
-    height: 100%;
   }
 
   .content {
     flex: 1;
     padding: 0 1rem;
-    height: 100%;
   }
 
   .right-sidebars {
     width: 25%;
-    height: 100%;
   }
 
   #slide-name {
@@ -477,11 +467,11 @@ button.next {
   }
 
   .slide h2 {
-    color: black;
+  color: black;
   }
 
   .slide li {
-    color: black;
+  color: black;
   }
 
   #blank2 {
