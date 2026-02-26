@@ -22,10 +22,14 @@ function RightSidebar() {
 
       <div className="right-sidebar">
         <a
-          href="https://blog.fpc-wp.com"
-          target="_blank"
-          rel="noopener noreferrer">
-          FPC 공식블로그<br><h5>(상담사례,시장동향,기타 등등)</h5>
+         href="https://blog.fpc-wp.com"
+         target="_blank"
+         rel="noopener noreferrer"
+        >
+        <div>
+          FPC 공식블로그
+          <h5>(상담사례, 시장동향, 기타 등등)</h5>
+        </div>
         </a>
       </div>
       <div className="right-sidebar">오픈 예정</div>
