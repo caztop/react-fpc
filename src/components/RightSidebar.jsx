@@ -20,7 +20,14 @@ function RightSidebar() {
         <span>QR을 스캔하거나 클릭</span>
       </div>
 
-      <div className="right-sidebar">FPC 공식블로그 곧 오픈</div>
+      <div className="right-sidebar">
+        <a
+          href="https://blog.fpc-wp.com"
+          target="_blank"
+          rel="noopener noreferrer">
+          FPC 공식블로그<br><h5>(상담사례,시장동향,기타 등등)</h5>
+        </a>
+      </div>
       <div className="right-sidebar">오픈 예정</div>
     </div>
   );
