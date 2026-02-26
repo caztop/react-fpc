@@ -16,8 +16,6 @@ function RightSidebar() {
             style={{ maxWidth: '100px', height: 'auto' }}
           />
         </a>
-        <br />
-        <span>QR을 스캔하거나 클릭</span>
       </div>
 
       <div className="right-sidebar">
