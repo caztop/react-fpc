@@ -24,9 +24,14 @@ function RightSidebar() {
         </a>
       </div>
       <div className="right-sidebar">
-        <a href="#" target="_blank" rel="noopener noreferrer">
-        FPC 공식 SNS<br />
-        <span className="sub-text">(다양한 SNS 채널 오픈예정)</span>
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            alert("준비 중입니다.😊");
+          }}
+        >FPC 공식 SNS<br />
+          <span className="sub-text">(다양한 SNS 채널 오픈예정)</span>
         </a>
       </div>
     </div>
