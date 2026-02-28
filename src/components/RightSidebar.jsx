@@ -19,10 +19,16 @@ function RightSidebar() {
       </div>
       <div className="right-sidebar">
         <a href="https://blog.fpc-wp.com" target="_blank" rel="noopener noreferrer">
-        FPC 공식블로그<br />(상담사례,시장현황,투자방법 등 기록)
+        FPC 공식블로그<br />
+        <span className="sub-text">(상담사례,시장현황,투자방법 등 기록)</span>
         </a>
       </div>
-      <div className="right-sidebar">오픈 예정</div>
+      <div className="right-sidebar">
+        <a href="#" target="_blank" rel="noopener noreferrer">
+        FPC 공식 SNS<br />
+        <span className="sub-text">(다양한 SNS 채널 오픈예정)</span>
+        </a>
+      </div>
     </div>
   );
 }

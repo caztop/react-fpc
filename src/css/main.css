@@ -150,9 +150,14 @@ button.next {
   background-color: #FFF9AF;
   padding: 1rem;
   font-size: 1rem;
+  font-weight: 500;
   border-radius: 1rem;
   text-align: center;
   flex: 1;
+}
+
+.qr-box p {
+  font-weight: 600;
 }
 
 /* QR 박스만 가로 배치 */
@@ -180,6 +185,7 @@ button.next {
 /* QR 텍스트 */
 .right-sidebar span {
   margin: 0;
+  font-size: 0.9rem;
   line-height: 1.2rem;
   text-align: left;
 }
@@ -195,6 +201,12 @@ button.next {
 .right-sidebar a:hover {
   transform: scale(1.05);
   color: #333;
+}
+
+.sub-text {
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.9;
 }
 
 /* blank2는 고정 높이 유지 */
