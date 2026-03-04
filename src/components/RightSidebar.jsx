@@ -31,7 +31,7 @@ function RightSidebar() {
             alert("준비 중입니다.😊");
           }}
         >FPC 공식 SNS<br />
-          <span className="sub-text">(다양한 SNS 채널 오픈예정)</span>
+          <span className="sub-text">(오픈예정)</span>
         </a>
       </div>
     </div>

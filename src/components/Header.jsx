@@ -6,7 +6,7 @@ function Header() {
     "provider": {
       "@type": "Organization",
       "name": "FPC",
-      "url": "https://www.fpc-wp.com"
+      "url": "https://fpc-wp.com"
     },
     "description": "맞춤형 재무설계 컨설팅 서비스"
   };
