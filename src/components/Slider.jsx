@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 function Slider() {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(0)
   const slides = [
     {
       title: '컨설팅 부문',
       items: [
         '▶ 간단 재무설계 컨설팅 : 약 30분의 시간으로 간단히 해 보는 재무설계',
-        '▶ 집중 재무설계 컨설팅 : 온 가족이 함께 계획하는 재무설계',
+        '▶ 집중 재무설계 컨설팅 : 평생을 계획하고 지속적으로 관리하는 재무설계',
         '▶ 기타 재무설계 및 금융 관련 컨설팅이 필요한 소비자 컨설팅',
         "▶ 참고 : 컨설팅은 '재무설계와 금융상품' 저자가 개인별 맞춤으로 진행",
       ],
@@ -18,7 +18,7 @@ function Slider() {
         '▶ 금융(은행,증권,보험 등) 관련 뉴스지 : Bi-Weekly News(격주 발간)',
         '▶ 금융소비자를 위한 컨텐츠 제작 : 금융서적 발간, 유튜브 영상 제작',
         '▶ 보험업 종사자를 위한 분야별 시리즈 교재 제작',
-        '▶ 기타 금융관련 교재 제작(의뢰제작)', 
+        '▶ 기타 금융관련 교재 제작(의뢰제작)',
       ],
     },
     {
@@ -30,7 +30,7 @@ function Slider() {
         '▶ 기타 : 여러 단체 소속원의 슬기로운 금융생활 교육',
       ],
     },
-  ];
+  ]
 
   return (
     <section className="content">
@@ -49,11 +49,15 @@ function Slider() {
             </div>
           ))}
         </div>
-        <button className="prev" onClick={() => index > 0 && setIndex(index - 1)}>&lt;</button>
-        <button className="next" onClick={() => index < slides.length - 1 && setIndex(index + 1)}>&gt;</button>
+        <button className="prev" onClick={() => index > 0 && setIndex(index - 1)}>
+          &lt;
+        </button>
+        <button className="next" onClick={() => index < slides.length - 1 && setIndex(index + 1)}>
+          &gt;
+        </button>
       </div>
     </section>
-  );
+  )
 }
 
-export default Slider;
+export default Slider
